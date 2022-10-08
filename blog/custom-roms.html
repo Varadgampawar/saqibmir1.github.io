@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Custom Roms</title>
+<link rel='stylesheet' type='text/css' href='../style.css'>
+<meta charset='utf-8'/>
+</head>
+<body>
+<h1>Custom Roms</h1>
+
+<p class='date'>Sat, 28 May 2022</p>
+
+
+
+	<p><b>Here's a to-the-point, no bullshit guide on why and how to install custom rom on any andorid device.</b></p>
+        <br>
+
+	<h2>What is Custom Rom:</h2>
+	<p>Andorid is an open source project and every andorid smartphone company uses their own skin/ui for their phones, for example redmi uses miui, samsung uses one ui and so on to make them look diffent from their competetors. These roms are calles stock roms.</p>
+	<p>So custom is is essentially a custom skin or custom ui built and maintained by developers voluntarily.</p>
+	<p>Some well known custom roms are pixel experience, lineage os, crdroid.</p>
+
+
+	<h2>Why Use Custom Rom:</h2>
+	<ul>
+		<li>Devs deliberately push updates that slow down your phone after a year or two of release (It's a marketing strategy)</li>
+		<li>Stock rom comes with a lot of bloatware and telemetry enabled.</li>
+		<li>Your phone's company will provide android and security updates only for a fixed period of time, say 2-3 years. After that, your device is discontinued.</li>
+	</ul>
+
+	<h2>Prerequisites:</h2>
+	<ul>
+		<li>Download <a href="https://forum.xda-developers.com/t/official-tool-windows-adb-fastboot-and-drivers-15-seconds-adb-installer-v1-4-3.2588979/">adb and fastboot</a> tools for your pc</li>
+		<li>Unlock bootloader: It's simple. Just google how to.</li>
+		<li>Download the rom file(zip) you want to install</li>
+		<li>Download any custom recovery: It is basically a 3rd party recovery environment used for formatting data, flashing img files etc Recommended: <a href="https://twrp.me">TWRP recovery</a></li>
+		<li>Download firmware for your device: Firmwares are provided by the comany itself so check the official website for your device.</li>
+
+	</ul>
+
+
+	<h2>Installation:</h2>
+	<ul>
+	<li>Step 1: Turn on adb debugging and connect your phone to pc using usb cabel.</li>
+	<li>Step 2: Open terminal and start typing these commands one by one</li>
+		<ul>
+			<li>adb devices (allow accesss from phone)</li>
+			<li>adb reboot fastboot</li>
+			<li>fastboot flash <recovery.zip></li>
+		</ul>
+		<p>Your device should boot in recovery</p>
+	<li>Step 3: In recovery, go to wipe>advanced wipe and delete cache,dalvik vendor, data, system</li>
+	<li>Step 4: Go to adb sideload and type these commands:</li>
+		<ul>
+			<li>adb sideload <firmware.zip></li>
+			<li>adb sideload <rom.zip></li>
+		</ul>
+
+	<li>Step 5: Go to wipe again and format data and type 'yes' to confirm</li>
+	<li>Step 6: Reboot to system.</li>
+
+	</ul>
+
+	<br>
+
+
+	<p><b>Volla! You are done.</p>
+
+	<br>
+<footer>by <strong><a href='https://saqibmir1.github.io'>Saqib Mir</a>, <a href="mailto:mirsaquib3737@gmail.com?subject=Software Recommendations">(Reply-to)</a></strong></footer>
+</body>
+
+</html>
