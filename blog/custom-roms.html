@@ -46,14 +46,14 @@
 		<ul>
 			<li>adb devices (allow accesss from phone)</li>
 			<li>adb reboot fastboot</li>
-			<li>fastboot flash <recovery.zip></li>
+			<li>fastboot flash [recovery.zip]</li>
 		</ul>
 		<p>Your device should boot in recovery</p>
 	<li>Step 3: In recovery, go to wipe>advanced wipe and delete cache,dalvik vendor, data, system</li>
 	<li>Step 4: Go to adb sideload and type these commands:</li>
 		<ul>
-			<li>adb sideload <firmware.zip></li>
-			<li>adb sideload <rom.zip></li>
+			<li>adb sideload [firmware.zip]</li>
+			<li>adb sideload [rom.zip]</li>
 		</ul>
 
 	<li>Step 5: Go to wipe again and format data and type 'yes' to confirm</li>
