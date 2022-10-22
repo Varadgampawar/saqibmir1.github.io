@@ -20,7 +20,7 @@ body {
     text-align: justify;
     font-family: C059, serif;
 
-    border: solid 2px var(--hl1);
+    border:  6px double var(--hl1);
     color: var(--fg);
     background: var(--bg);
 }
@@ -33,6 +33,10 @@ h1 {
     color: var(--hl1);
     font-size: 2.4em;
     text-align: center;
+}
+
+img {
+    max-width: 100%;
 }
 
 a {
@@ -53,14 +57,21 @@ ul {
     margin: 5px;
 }
 
+.columns {
+    columns: 2;
+}
+
+.columns ul {
+    text-indent: 10px;
+}
+
 .button {
     color: var(--fg);
-    margin-top: 10px;
-    display: inline-block;
+    text-align: left;
     padding: 7px 10px 7px 10px;
     border: 1px solid var(--hl1);
-    
     font-size: 1.3em;
+    display: inline-block;
     font-weight: bold;
     font-style: italic;
 }
@@ -133,10 +144,13 @@ ul {
         font-size: 3em;
     }
 
+    .columns {
+        columns: 1;
+    }
+
     body {
-        width: 85%;
-        margin-top: 1.2em;
-        margin-bottom: 10px;
+        width: 78%;
+        margin-top, margin-bottom: 0.2em;
     }
 
     .cutter {
