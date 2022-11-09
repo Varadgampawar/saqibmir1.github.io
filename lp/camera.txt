@@ -1,0 +1,24 @@
+'''
+    Name : Sahil Chandan
+    Div : A 
+    Roll No : 10
+    Assignment No. 8
+'''
+import sys
+import time 
+import os
+
+os.system("clear")
+
+while True:
+   
+   print("Do you want to click  a picture (Y/N)")
+   choice=int(input(" enter the choice : "))
+   
+   if choice==1:
+      os.system("fswebcam/home/pratik/fsweb.jpg")   
+   elif choice==2:
+       print("ok")
+       break    
+   else:
+     print("invalid choice")
