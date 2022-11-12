@@ -163,3 +163,21 @@ ul {
     display: table;
     clear: both;
 }
+
+
+
+
+
+
+
+
+
+table, th, td {
+    border: 1px solid var(--hl1);
+    border-colllapse: collapse;
+}
+
+th {
+    background-color: var(--hl1);
+}
+
