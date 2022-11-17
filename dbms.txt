@@ -1,3 +1,111 @@
+
+ create table Dept (
+     DeptNo int,
+     Name varchar(20),
+     Location varchar(20),
+     ManagerEmpID int,
+     primary key(DeptNo)
+     );
+ create table Employees (
+     Name varchar(20),
+     EmpID int,
+     Address varchar(20),
+     City varchar(10),
+     DOB date,
+     Date_Of_Joining date,
+     Gender char(1),
+     Salary int,
+     DeptNo int,
+     primary key (EmpID),
+     constraint check_gender check(Gender in ('M','F')),
+     foreign key (DeptNo) references Dept(DeptNo)
+     on delete cascade
+     on update cascade
+     );
+
+ create table Project(
+     ProjectID int,
+     Title varchar(20),
+     City varchar(10),
+     primary key(ProjectID)
+    );
+
+
+ create table Work(
+     EmpID int, 
+     ProjectID int, 
+     Total_hrs_worked int, 
+     primary key(EmpID), 
+     foreign key (ProjectID) references Project(ProjectID) 
+     on update cascade 
+     on delete cascade
+     );
+
+
+ create table Dependant(
+     EmpID int,
+     Name_of_Dependant varchar(20),
+     Age int,
+     Relation varchar(20)
+     );
+
+insert into Dept values(1,'Development','Building 1',101);
+insert into Dept values(2,'Testing','Building 2',201);
+insert into Dept values(3,'Planning','Building 3',259);
+insert into Dept values(4,'Service','Building 4',300);
+insert into Dept values(5,'Administration','Main Building',199);
+insert into Employees values('Pratik Somkuwar',102,'27-F Panchvati','Nashik','1981-08-06','2007-01-05','M',40000,2);
+insert into Employees values('Ashish Patel',185,'21-C Athwa Gate','Surat','1983-03-11','2008-02-01','M',45000,5);
+insert into Employees values('Sakshi Kumar',191,'24B Sadar Bazaar','Delhi','1981-01-16','2004-04-11','F',41300,4);
+insert into Employees values('Rajvir Desai',244,'A52 South Bombay','Mumbai','1985-01-16','2004-03-01','M',44300,2);
+insert into Employees values('Anish Koli',101,'44-A Dwarka Gate','Pune','1991-03-11','2018-08-21','M',52000,1);
+insert into Employees values('Varsha Iyer',201,'47-P India Gate','Pune','1992-03-11','2017-01-14','F',54000,2);
+insert into Employees values('Periyaman S.',259,'13-C Durga Nagar','Chennai','1990-01-10','2010-01-14','M',51000,3);
+insert into Employees values('Rhea Chakraborty',300,'59-L Saroj Towers','Kolkata','1985-12-13','2011-05-19','F',32000,4);
+insert into Employees values('Lenzing Sangjop',199,'90-R Jamkol Area','Imphal','1984-09-21','2005-01-31','M',56500,5);
+insert into Employees values('Rebecca Johnson',287,'49-F Xavier Street','Kochi','1995-06-11','2019-06-11','F',32000,1);
+insert into Employees values('Swati Chandra',266,'49-F Ambaji Chowk','Puri','1997-03-26','2016-02-15','F',31500,3);
+insert into Project values(1,'Banking Project','Pune');
+insert into Project values(2,'ERP System','Delhi');
+insert into Project values(3,'Software Management','Chennai');
+insert into Project values(4,'Testing Project','Mumbai');
+insert into Work values(101,1,115);
+insert into Work values(102,4,204);
+insert into Work values(185,2,186);
+insert into Work values(191,2,156);
+insert into Work values(199,2,203);
+insert into Work values(201,1,246);
+insert into Work values(244,4,276);
+insert into Work values(259,3,236);
+insert into Work values(266,3,133);
+insert into Work values(287,3,113);
+insert into Work values(300,1,211);
+insert into Dependant values(102,'Jagdish Somkuwar',59,'Father');
+insert into Dependant values(185,'Jaya Patel',69,'Mother');
+insert into Dependant values(185,'Avi Patel',9,'Son');
+insert into Dependant values(101,'Jayesh Koli',62,'Father');
+insert into Dependant values(191,'Amayra Kumar',12,'Daughter');
+insert into Dependant values(191,'Amit Kumar',10,'Son');
+insert into Dependant values(199,'Danzo Sangjop',78,'Father');
+insert into Dependant values(201,'Ritesh Iyer',14,'Son');
+insert into Dependant values(244,'Samiksha Desai',32,'Wife');
+insert into Dependant values(259,'Rajaksima',30,'Wife');
+insert into Dependant values(259,'Thiru',8,'Son');
+insert into Dependant values(266,'Kapil Chandra',59,'Father');
+insert into Dependant values(266,'Nandini Chandra',54,'Mother');
+insert into Dependant values(287,'Dwyane Johnson',30,'Husband');
+insert into Dependant values(300,'Sahil Chakraborty',10,'Son');
+insert into Dependant values(300,'Kajal Chakraborty',8,'Daughter');
+select * from Dept; 
+select * from Employees; 
+select * from Project; 
+select * from Work; 
+select * from Dependant;
+/*Queries Sucessful !Press Enter*/
+
+
+
+---------------------------------------------------------------------------
 q2- SQL Queries:
     Consider the given Database Schema: for problem statement 1
 1.	Dept (Deptno , Name , Location, Managerempid)
@@ -1003,6 +1111,78 @@ while(True):
      break
 
 
+
+Alternative 
+-----------------------------------------------------------------
+import mysql.connector
+
+mydb = mysql.connector.connect(
+	host = "localhost",
+	user = "root",
+	password = "",
+	database = "mydatabase"
+)
+
+mycursor = mydb.cursor()
+
+#Create Table
+def create_table():
+	mycursor.execute("CREATE TABLE customers(cid int,name VARCHAR(255), address VARCHAR(255))")
+
+	print("\n Table Created!")
+
+#Insert Records
+
+def insert(): 
+	cid = int(input("Enter Customer ID : "))
+	name = input("Enter Customer Name : ")
+	address = input("Enter Address : ")
+	sql = "INSERT INTO customers(cid,name, address) VALUES (%s,%s,%s)"
+	val = (cid,name,address)
+	mycursor.execute(sql,val)
+	mydb.commit()
+	print(mycursor.rowcount,"record inserted!")
+
+#Display Table
+def display():
+	mycursor.execute("SELECT * FROM customers")
+	myresult = mycursor.fetchall()
+	for x in myresult:
+		print(x)
+	
+#Delete Records
+def delete():
+	d_cid = input("Enter Customer ID to be deleted : ")
+    #This also works
+	#sql = f"delete from customers where cid = {d_cid}"
+    sql = 'DELETE FROM customers WHERE cid = ' + d_cid
+	mycursor.execute(sql)
+	mydb.commit()
+	print(mycursor.rowcount,"record deleted!")
+
+def main():
+	while(True):
+		print("--------------Customer Table--------------")	
+		print("\n1.Create Table")
+		print("\n2.Insert new customer")
+		print("\n3.Display")
+		print("\n4.Delete")
+		print("\n5.Exit")
+
+		choice = int(input())
+		if choice == 1:
+			create_table()
+		elif choice == 2:
+			insert()
+		elif choice == 3:
+			display()
+		elif choice == 4:
+			delete()
+		else:	
+			exit()
+main()
+
+
 -------------------------------------------------------------------------------------------
 
 
@@ -1749,7 +1929,277 @@ john"}])
 }
 
 -------------------------------------------------------------------------------------------
+ 
+Lature Program 
 
+unix@unix-HP-280-G1-MT:~$ sudo mysql -u root -p 
+[sudo] password for unix: 
+Sorry, try again.
+[sudo] password for unix: 
+Enter password: 
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 5.7.33-0ubuntu0.16.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database TE42;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| TE                 |
+| TE42               |
+| TE50               |
+| TEA13              |
+| a6                 |
+| mysql              |
+| performance_schema |
+| sys                |
+| te50               |
+| tea54              |
+| tea74              |
++--------------------+
+12 rows in set (0.06 sec)
+
+mysql> use TE42;
+Database changed
+mysql> Create table Physician (Reg_no int,Name varchar(20),Tel_no int,City varchar(20));
+Query OK, 0 rows affected (0.36 sec)
+
+mysql> create table Patient(P_name varchar(20),Street varchar(15),City varchar(20));
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> CREATE TABLE VISIT (P_name varchar(20),reg_no int,date_of_visit date,fees int);
+Query OK, 0 rows affected (0.25 sec)
+
+mysql> show tables;
++----------------+
+| Tables_in_TE42 |
++----------------+
+| Patient        |
+| Physician      |
+| VISIT          |
++----------------+
+3 rows in set (0.00 sec)
+
+mysql> desc Patient;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| P_name | varchar(20) | YES  |     | NULL    |       |
+| Street | varchar(15) | YES  |     | NULL    |       |
+| City   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into Patient values("Dipak","mg road","Nashik");
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Patient values("Rahul","aodha","Nashik"),("Yuvraj","Dy road", "Nashik"),("Hitesh","Gd Road","Pune");
+Query OK, 3 rows affected (0.06 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> desc Patient;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| P_name | varchar(20) | YES  |     | NULL    |       |
+| Street | varchar(15) | YES  |     | NULL    |       |
+| City   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> ^C
+mysql> desc Physician;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| Reg_no | int(11)     | YES  |     | NULL    |       |
+| Name   | varchar(20) | YES  |     | NULL    |       |
+| Tel_no | int(11)     | YES  |     | NULL    |       |
+| City   | varchar(20) | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into Physician(1234,"MR. A",675453,"Nashik"),(2345,"Mr. B",345632,"Mumbai"),(4563,"MR.C",625134,"Pune"),(9363,"MR.D",456322,"Nagpur");
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '1234,"MR. A",675453,"Nashik"),(2345,"Mr. B",345632,"Mumbai"),(4563,"MR.C",625134' at line 1
+mysql> insert into Physician values(1234,"MR. A",675453,"Nashik"),(2345,"Mr. B",345632,"Mumbai"),(4563,"MR.C",625134,"Pune"),(9363,"MR.D",456322,
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+
+mysql> desc VISIT;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| P_name        | varchar(20) | YES  |     | NULL    |       |
+| reg_no        | int(11)     | YES  |     | NULL    |       |
+| date_of_visit | date        | YES  |     | NULL    |       |
+| fees          | int(11)     | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+
+mysql> insert into VISIT values("Yuvraj",4563,"2022-9-14",500);
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into VISIT values("Hitesh",9363,"2017-7-13",465),("Mina",4563,"2020-1-1",633),("Rahul",1234,"2021-2-4",444);
+Query OK, 3 rows affected (0.04 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from Physician;
++--------+-------+--------+--------+
+| Reg_no | Name  | Tel_no | City   |
++--------+-------+--------+--------+
+|   1234 | MR. A | 675453 | Nashik |
+|   2345 | Mr. B | 345632 | Mumbai |
+|   4563 | MR.C  | 625134 | Pune   |
+|   9363 | MR.D  | 456322 | Nagpur |
++--------+-------+--------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from Patient;
++--------+---------+--------+
+| P_name | Street  | City   |
++--------+---------+--------+
+| Dipak  | mg road | Nashik |
+| Rahul  | aodha   | Nashik |
+| Yuvraj | Dy road | Nashik |
+| Hitesh | Gd Road | Pune   |
++--------+---------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select * from VISIT;
+
++--------+--------+---------------+------+
+| P_name | reg_no | date_of_visit | fees |
++--------+--------+---------------+------+
+| Rahul  |   2345 | 2022-12-10    |  500 |
+| Yuvraj |   4563 | 2022-09-14    |  500 |
+| Hitesh |   9363 | 2017-07-13    |  465 |
+| Mina   |   4563 | 2020-01-01    |  633 |
+| Rahul  |   1234 | 2021-02-04    |  444 |
++--------+--------+---------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select * from Patient;
++--------+---------+--------+
+| P_name | Street  | City   |
++--------+---------+--------+
+| Rahul  | aodha   | Nashik |
+| Yuvraj | Dy road | Nashik |
+| Hitesh | Gd Road | Pune   |
++--------+---------+--------+
+3 rows in set (0.00 sec)
+
+SELECT * FROM Patient  where Patient.City = "Nashik";
++--------+---------+--------+
+| P_name | Street  | City   |
++--------+---------+--------+
+| Rahul  | aodha   | Nashik |
+| Yuvraj | Dy road | Nashik |
++--------+---------+--------+
+2 rows in set (0.00 sec)
+
+
+select count(Physician.Name) from Physician where Physician.City = "Mumbai" group by Physician.Name ;
++-----------------------+
+| count(Physician.Name) |
++-----------------------+
+|                     1 |
++-----------------------+
+1 row in set (0.00 sec)
+
+select VISIT.P_name,Patient.City from Patient inner join VISIT Where VISIT.P_name=Patient.P_name and date_of_visit ="2017-7-13";
++--------+------+
+| P_name | City |
++--------+------+
+| Hitesh | Pune |
++--------+------+
+1 row in set (0.00 sec)
+
+select VISIT.P_name,VISIT.fees from VISIT where VISIT.fees > "5000";
+Empty set (0.00 sec)
+
+select Physician.Name,count(VISIT.P_name) from Physician inner join VISIT where  Physician.reg_no = VISIT.reg_no group by(Physician.Name);
++-------+---------------------+
+| Name  | count(VISIT.P_name) |
++-------+---------------------+
+| MR. A |                   1 |
+| Mr. B |                   1 |
+| MR.C  |                   2 |
+| MR.D  |                   1 |
++-------+---------------------+
+4 rows in set (0.00 sec)
+
+select date_of_visit ,sum(fees) from VISIT group by(date_of_visit );
++---------------+-----------+
+| date_of_visit | sum(fees) |
++---------------+-----------+
+| 2017-07-13    |       465 |
+| 2020-01-01    |       633 |
+| 2021-02-04    |       444 |
+| 2022-09-14    |       500 |
+| 2022-12-10    |       500 |
++---------------+-----------+
+5 rows in set (0.00 sec)
+
+
+select Physician.Name from Physician inner join VISIT where Physician.reg_no = VISIT.reg_no and VISIT.P_name ="MINA";
++------+
+| Name |
++------+
+| MR.C |
++------+
+1 row in set (0.00 sec)
+
+
+select * from Patient order by(P_name) asc;
++--------+---------+--------+
+| P_name | Street  | City   |
++--------+---------+--------+
+| Hitesh | Gd Road | Pune   |
+| Rahul  | aodha   | Nashik |
+| Yuvraj | Dy road | Nashik |
++--------+---------+--------+
+3 rows in set (0.00 sec)
+
+select Physician.Name from Physician inner join Patient where Patient.City= Physician.City;
++-------+
+| Name  |
++-------+
+| MR. A |
+| MR. A |
+| MR.C  |
++-------+
+
+select distinct  Physician.Name from Physician inner join Patient where Patient.City= Physician.City;
++-------+
+| Name  |
++-------+
+| MR. A |
+| MR.C  |
++-------
+
+
+select Patient.P_name from Patient where P_name like '%A%';
++--------+
+| P_name |
++--------+
+| Rahul  |
+| Yuvraj |
++--------+
+2 rows in set (0.00 sec)
 
 
 
