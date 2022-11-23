@@ -46,14 +46,14 @@ T}
 .TS
 tab(;) nospaces;
 rW15|lx.
-\m[default]2017 - 2021\m[linecolor];T{
+\m[default]2021 - 2024\m[linecolor];T{
 .B "K.K Wagh College of Engineering Education And Research"
 \(en Nashik, MH 
 .br
 .I "Bachelor of Engineering in Computers"
 .sp .5
 T}
-\m[default]2015 - 2016\m[linecolor];T{
+\m[default]2019 - 2020\m[linecolor];T{
 .B "Govt. Boys Hr. Sec. School"
 \(en Kupwara, Kashmir
 .br
