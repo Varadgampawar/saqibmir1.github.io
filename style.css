@@ -11,19 +11,18 @@ html {
 }
 
 body {
-    margin: auto;
-    margin-top: 1em;
-    width: 87%;
-    max-width: 900px;
-    padding: 1.4em 2em 1.3em 2em;
+	margin: auto;
+	margin-top: 1em;
+	width: 87%;
+	max-width: 900px;
+	padding: 1.4em 2em 1.3em 2em;
 
-    text-align: justify;
-    font-family: sans-serif;
-    font-size: 16px;
-
-    border:  6px double var(--hl1);
-    color: var(--fg);
-    background: var(--bg);
+	text-align: justify;
+	font-family: C059, serif;
+	border:  6px double var(--hl1);
+	outline: 6px solid var(--bg);
+	color: var(--fg);
+	background: var(--bg);
 }
 
 h1, h2, h3, h4 {
