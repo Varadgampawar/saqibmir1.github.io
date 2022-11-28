@@ -57,6 +57,11 @@ ul {
     margin: 5px;
 }
 
+.blogsubheading{
+    text-align: center;
+    color: var(--hl1);
+}
+
 .columns {
     columns: 2;
 }
