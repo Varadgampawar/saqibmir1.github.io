@@ -52,6 +52,19 @@ ul {
     padding-left: 18px;
 }
 
+pre code {
+  background-color: black;
+  border: 3px solid var(--hl1);
+  display: block;
+  padding: 10px;
+  position: relative;
+
+  white-space: pre-line;
+  word-wrap: break-word;
+  text-align: justify;
+ 
+}
+
 .title {
     font-size: 4em;
     margin: 5px;
@@ -133,6 +146,13 @@ ul {
     margin: 0px 0px 0px 0px;
 }
 
+.titleimg{
+    margin: auto;
+    max-width: 90%;
+    max-height: 400px;
+    display: block;
+}
+
 @media only screen and (max-width: 768px) {
     .pane-right {
         width: 100%;
@@ -169,20 +189,14 @@ ul {
     clear: both;
 }
 
-
-
-
-
-
-
-
-
 table, th, td {
+    font-size: 18px;
     border: 1px solid var(--hl1);
     border-colllapse: collapse;
 }
 
 th {
+    font-size: 18px;
     background-color: var(--hl1);
 }
 
